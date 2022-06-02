@@ -1,4 +1,4 @@
 #!/usr/bin/python3
-for i in range(97, 123):
-    if (not(chr(i) == "q" or chr(i) == "e")):
-        print(chr(i), end="")
+for i in range(97, 123):  # ASSCI code
+    if i != 101 and i != 113:
+        print("{:s}".format(chr(i)), end="")
