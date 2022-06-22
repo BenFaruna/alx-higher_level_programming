@@ -10,6 +10,22 @@ class Square:
         self.__size = size
         self.__position = position
 
+    def __str__(self):
+        if self.__size == 0:
+            return ""
+        for j in range(self.__size + self.position[1]):
+            if j < self.position[1]:
+                print()
+            else:
+                for i in range(self.__size + self.position[0]):
+                    if i < self.position[0]:
+                        print(" ", end="")
+                    else:
+                        print("#", end="")
+                if j != self.__size + self.position[1] - 1:
+                    print()
+        return ""
+
     def area(self):
         return (self.__size ** 2)
 
