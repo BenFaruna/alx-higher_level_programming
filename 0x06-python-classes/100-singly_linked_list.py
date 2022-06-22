@@ -4,7 +4,11 @@
 
 
 class Node:
-    """This class creates Nodes for a linked link list"""
+    """This class creates Nodes for a linked link list
+
+    Attributes:
+        private attributes: data and new_node
+        public attributes: check_data and check_next_node"""
 
     def __init__(self, data, next_node=None):
         self.check_data(data)
