@@ -21,7 +21,7 @@ class Rectangle:
         """returns printable string (representation of the rectangle)"""
         rectangle = ""
         if (self.width == 0 or self.height == 0):
-            return ("\n")
+            return ("")
         for height in range(self.height):
             rectangle += (str(self.print_symbol) * self.width)
             if (height < self.height - 1):
