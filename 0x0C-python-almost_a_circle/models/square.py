@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from .rectangle import Rectangle
 """module for square class inheriting from the rectangle class"""
 

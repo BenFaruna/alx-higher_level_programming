@@ -97,15 +97,19 @@ class Rectangle(Base):
 
     def update(self, *args, **kwargs):
         """Updates the attributes of the Rectangle class"""
+        attrs = ["id", "width", "height", "x", "y"]
         if len(args) != 0:
             attr_index = 0
-            attrs = ["id", "width", "height", "x", "y"]
             for arg in args:
                 setattr(self, attrs[attr_index], arg)
                 attr_index += 1
         else:
             for attr, value in kwargs.items():
+                if (attr not in attrs):
+                    raise AttributeError("{} is not an attribute of {}"
+                                         .format(attr, self.__name__))
                 setattr(self, attr, value)
+        return self
 
     def to_dictionary(self):
         """returns dictionary representation of Rectangle class"""

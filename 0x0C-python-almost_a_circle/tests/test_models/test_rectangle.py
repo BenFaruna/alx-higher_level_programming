@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import io
 import unittest
 from unittest.mock import patch
@@ -230,23 +231,224 @@ class RectangleTestCase(unittest.TestCase):
         self.assertEqual(str(r3), "[Rectangle] (1) 1/1 - 2/3")
 
     def test_string_with_print(self):
+        """test print statement with positional arguments"""
         r1 = Rectangle(1, 1)
         r2 = Rectangle(2, 3)
         r3 = Rectangle(1, 5)
-        r4 = Rectangle(1, 2, 5, 3, 1)
-        r5 = Rectangle(4, 6, 0, 2, 10)
-        r6 = Rectangle(2, 3, 1, 1)
         self.assert_str_stdout(r1, "[Rectangle] (1) 0/0 - 1/1\n")
         self.assert_str_stdout(r2, "[Rectangle] (2) 0/0 - 2/3\n")
         self.assert_str_stdout(r3, "[Rectangle] (3) 0/0 - 1/5\n")
+
+    def test_string_with_print_optional_parameters(self):
+        """test print statement with optional parameters"""
+        r4 = Rectangle(1, 2, 5, 3, 1)
+        r5 = Rectangle(4, 6, 0, 2, 10)
+        r6 = Rectangle(2, 3, 1, 1)
         self.assert_str_stdout(r4, "[Rectangle] (1) 5/3 - 1/2\n")
         self.assert_str_stdout(r5, "[Rectangle] (10) 0/2 - 4/6\n")
-        self.assert_str_stdout(r6, "[Rectangle] (4) 1/1 - 2/3\n")
+        self.assert_str_stdout(r6, "[Rectangle] (1) 1/1 - 2/3\n")
 
-    # -------------- Task # ----------------
-    # -------------- Task # ----------------
-    # -------------- Task # ----------------
-    # -------------- Task # ----------------
-    # -------------- Task # ----------------
-    # -------------- Task # ----------------
-    # -------------- Task # ----------------
+    # -------------- Task 7 ----------------
+    def test_display_with_x(self):
+        """test display method when x is not zero but y is zero"""
+        r1 = Rectangle(1, 1, 1, 0)
+        r2 = Rectangle(1, 3, 2, 0)
+        r3 = Rectangle(3, 2, 5, 0)
+        output1 = " #\n"
+        output2 = "  #\n  #\n  #\n"
+        output3 = "     ###\n     ###\n"
+        self.assert_display_stdout(r1, output1)
+        self.assert_display_stdout(r2, output2)
+        self.assert_display_stdout(r3, output3)
+
+    def test_display_with_y(self):
+        """test display method when y is not zero but x is zero"""
+        r1 = Rectangle(1, 1, 0, 1)
+        r2 = Rectangle(2, 3, 0, 2)
+        output1 = "\n#\n"
+        output2 = "\n\n##\n##\n##\n"
+        self.assert_display_stdout(r1, output1)
+        self.assert_display_stdout(r2, output2)
+
+    def test_display_with_x_y(self):
+        r1 = Rectangle(2, 3, 2, 2)
+        r2 = Rectangle(3, 2, 1, 2)
+        output1 = "\n\n  ##\n  ##\n  ##\n"
+        output2 = "\n\n ###\n ###\n"
+        self.assert_display_stdout(r1, output1)
+        self.assert_display_stdout(r2, output2)
+
+    # -------------- Task 8 ----------------
+    def test_id_after_update(self):
+        """test the id of instance after update to verify same instance"""
+        r1 = Rectangle(1, 1)
+        r2 = r1.update(5)
+        self.assertIs(r1, r2)
+
+    def test_update_with_one_param(self):
+        """test rectangle to ensure only id parameter is updated"""
+        r1 = Rectangle(2, 5, 3, 3, 10)
+        r1.update(1)
+        self.assertEqual(r1.id, 1)
+        self.assertEqual(r1.width, 2)
+        self.assertEqual(r1.height, 5)
+        self.assertEqual(r1.x, 3)
+        self.assertEqual(r1.y, 3)
+
+    def test_update_with_two_param(self):
+        """test rectangle to ensure only two parameters are updated"""
+        r1 = Rectangle(2, 5, 3, 3, 10)
+        r1.update(1, 1)
+        self.assertEqual(r1.id, 1)
+        self.assertEqual(r1.width, 1)
+        self.assertEqual(r1.height, 5)
+        self.assertEqual(r1.x, 3)
+        self.assertEqual(r1.y, 3)
+
+    def test_update_with_three_param(self):
+        """test rectangle to ensure only three parameters are updated"""
+        r1 = Rectangle(2, 5, 3, 3, 10)
+        r1.update(1, 1, 10)
+        self.assertEqual(r1.id, 1)
+        self.assertEqual(r1.width, 1)
+        self.assertEqual(r1.height, 10)
+        self.assertEqual(r1.x, 3)
+        self.assertEqual(r1.y, 3)
+
+    def test_update_with_four_param(self):
+        """test rectangle to ensure only four parameters are updated"""
+        r1 = Rectangle(2, 5, 3, 3, 10)
+        r1.update(1, 1, 10, 5)
+        self.assertEqual(r1.id, 1)
+        self.assertEqual(r1.width, 1)
+        self.assertEqual(r1.height, 10)
+        self.assertEqual(r1.x, 5)
+        self.assertEqual(r1.y, 3)
+
+    def test_update_with_five_param(self):
+        """test rectangle to ensure all parameters are updated correctly"""
+        r1 = Rectangle(2, 5, 3, 3, 10)
+        r1.update(1, 1, 10, 5, 2)
+        self.assertEqual(r1.id, 1)
+        self.assertEqual(r1.width, 1)
+        self.assertEqual(r1.height, 10)
+        self.assertEqual(r1.x, 5)
+        self.assertEqual(r1.y, 2)
+
+    def test_update_args_wrong(self):
+        """Test update with different invalid arguments(args)"""
+        Rect_test = Rectangle(11, 3)
+
+        with self.assertRaises(ValueError) as excep:
+            Rect_test.update(9, 0)
+        message = "width must be > 0"
+        self.assertEqual(str(excep.exception), message)
+
+        with self.assertRaises(ValueError) as excep:
+            Rect_test.update(9, 1, -98)
+        message = "height must be > 0"
+        self.assertEqual(str(excep.exception), message)
+
+        with self.assertRaises(ValueError) as excep:
+            Rect_test.update(9, 1, 98, -4)
+        message = "x must be >= 0"
+        self.assertEqual(str(excep.exception), message)
+
+        with self.assertRaises(ValueError) as excep:
+            Rect_test.update(9, 1, 98, 4, -8)
+        message = "y must be >= 0"
+        self.assertEqual(str(excep.exception), message)
+
+    # -------------- Task 9 ----------------
+    def test_id_after_key_worded_update(self):
+        """test the id of instance after update to verify same instance"""
+        r1 = Rectangle(1, 1)
+        r2 = r1.update(width=5)
+        self.assertIs(r1, r2)
+
+    def test_update_with_one_key_worded_param(self):
+        """test rectangle to ensure only id parameter is updated"""
+        r1 = Rectangle(2, 5, 3, 3, 10)
+        r1.update(y=1)
+        self.assertEqual(r1.id, 10)
+        self.assertEqual(r1.width, 2)
+        self.assertEqual(r1.height, 5)
+        self.assertEqual(r1.x, 3)
+        self.assertEqual(r1.y, 1)
+
+    def test_update_with_two_key_worded_param(self):
+        """test rectangle to ensure only two parameters are updated"""
+        r1 = Rectangle(2, 5, 3, 3, 10)
+        r1.update(x=1, width=1)
+        self.assertEqual(r1.id, 10)
+        self.assertEqual(r1.width, 1)
+        self.assertEqual(r1.height, 5)
+        self.assertEqual(r1.x, 1)
+        self.assertEqual(r1.y, 3)
+
+    def test_update_with_three_key_worded_param(self):
+        """test rectangle to ensure only three parameters are updated"""
+        r1 = Rectangle(2, 5, 3, 3, 10)
+        r1.update(height=1, id=1, x=10)
+        self.assertEqual(r1.id, 1)
+        self.assertEqual(r1.width, 2)
+        self.assertEqual(r1.height, 1)
+        self.assertEqual(r1.x, 10)
+        self.assertEqual(r1.y, 3)
+
+    def test_update_with_four_key_worded_param(self):
+        """test rectangle to ensure only four parameters are updated"""
+        r1 = Rectangle(2, 5, 3, 3, 10)
+        r1.update(id=1, y=1, height=10, x=5)
+        self.assertEqual(r1.id, 1)
+        self.assertEqual(r1.width, 2)
+        self.assertEqual(r1.height, 10)
+        self.assertEqual(r1.x, 5)
+        self.assertEqual(r1.y, 1)
+
+    def test_update_with_five_key_worded_param(self):
+        """test rectangle to ensure all parameters are updated correctly"""
+        r1 = Rectangle(2, 5, 3, 3, 10)
+        r1.update(x=1, width=1, id=10, y=5, height=2)
+        self.assertEqual(r1.id, 10)
+        self.assertEqual(r1.width, 1)
+        self.assertEqual(r1.height, 2)
+        self.assertEqual(r1.x, 1)
+        self.assertEqual(r1.y, 5)
+
+    def test_update_with_wrong_keyword(self):
+        r1 = Rectangle(2, 3)
+        with self.assertRaises(AttributeError):
+            r1.update(wrong=5)
+
+# -----------------Tests: task 13---------------------------------
+
+    def test_dictionary(self):
+        """Test dictionary"""
+        with self.assertRaises(TypeError) as excep:
+            Rectangle.to_dictionary()
+        message = "to_dictionary() missing 1 required \
+positional argument: 'self'"
+        self.assertEqual(str(excep.exception), message)
+
+        Rect_test = Rectangle(5, 78)
+        dic = {'id': 1, 'y': 0, 'height': 78, 'width': 5, 'x': 0}
+        self.assertEqual(Rect_test.to_dictionary(), dic)
+
+        Rect_test = Rectangle(5, 78, 5, 2, 9)
+        dic = {'id': 9, 'y': 2, 'height': 78, 'width': 5, 'x': 5}
+        self.assertEqual(Rect_test.to_dictionary(), dic)
+
+        Rect_test1 = Rectangle(1, 4, 5, 6, 2)
+        Rect_test1_dic = Rect_test1.to_dictionary()
+        Rect_test2 = Rectangle(4, 8, 7, 90, 3)
+        Rect_test2.update(**Rect_test1_dic)
+        self.assertEqual(str(Rect_test1), str(Rect_test2))
+
+        Rect_test.update(12, 5, 67, 4, 8)
+        dic = {'height': 67, 'x': 4, 'id': 12, 'width': 5, 'y': 8}
+        self.assertEqual(Rect_test.to_dictionary(), dic)
+
+
+if __name__ == "__main__":
+    unittest.main()

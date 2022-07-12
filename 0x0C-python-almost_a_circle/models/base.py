@@ -20,18 +20,24 @@ class Base:
             self.id = id
 
     @staticmethod
-    def to_json_string(list_dicitonaries):
+    def to_json_string(list_dictionaries):
         """static method for converting a list dictionary into a json string"""
-        return json.dumps(list_dicitonaries)
+        if not list_dictionaries or not len(list_dictionaries):
+            list_dictionaries = []
+        return json.dumps(list_dictionaries)
 
     @staticmethod
     def from_json_string(json_string):
         """static method for converting a json string into list"""
+        if json_string is None or not json_string:
+            return []
         return json.loads(json_string)
 
     @classmethod
     def save_to_file(cls, list_objs):
         """saves list of object into a file as json string"""
+        if not list_objs:
+            list_objs = []
         filename = cls.__name__
         str_list = [obj.to_dictionary() for obj in list_objs]
 
