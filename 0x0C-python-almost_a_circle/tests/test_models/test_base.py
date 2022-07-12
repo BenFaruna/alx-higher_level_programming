@@ -1,9 +1,11 @@
+#!/usr/bin/python3
+"""test cases for Base class from models/base.py"""
 import unittest
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
 import os
-"""test cases for Base class from models/base.py"""
+from models.base import __doc__ as doc_check
 
 
 class BaseTestCase(unittest.TestCase):
@@ -12,6 +14,26 @@ class BaseTestCase(unittest.TestCase):
     def setUp(self):
         """setup code to reset the nb_objects count before every test"""
         Base._Base__nb_objects = 0
+
+    def test_docstrings(self):
+        self.assertIsNotNone(doc_check)
+        self.assertIsNotNone(Base.__doc__)
+        self.assertIs(hasattr(Base, "__init__"), True)
+        self.assertIsNotNone(Base.__init__.__doc__)
+        self.assertIs(hasattr(Base, "create"), True)
+        self.assertIsNotNone(Base.create.__doc__)
+        self.assertIs(hasattr(Base, "to_json_string"), True)
+        self.assertIsNotNone(Base.to_json_string.__doc__)
+        self.assertIs(hasattr(Base, "from_json_string"), True)
+        self.assertIsNotNone(Base.from_json_string.__doc__)
+        self.assertIs(hasattr(Base, "save_to_file"), True)
+        self.assertIsNotNone(Base.save_to_file.__doc__)
+        self.assertIs(hasattr(Base, "load_from_file"), True)
+        self.assertIsNotNone(Base.load_from_file.__doc__)
+        self.assertIs(hasattr(Base, "save_to_file_csv"), True)
+        self.assertIsNotNone(Base.save_to_file.__doc__)
+        self.assertIs(hasattr(Base, "load_from_file_csv"), True)
+        self.assertIsNotNone(Base.load_from_file.__doc__)
 
 # -------------- Task 1 ----------------
     def test_nb_objects_first_value(self):

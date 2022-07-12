@@ -1,11 +1,12 @@
 #!/usr/bin/python3
+"""test cases for Base class from models/square.py"""
 import io
 import unittest
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
 from contextlib import redirect_stdout
-"""test cases for Base class from models/square.py"""
+from models.square import __doc__ as doc_check
 
 
 class SquareTestCase(unittest.TestCase):
@@ -14,6 +15,21 @@ class SquareTestCase(unittest.TestCase):
     def setUp(self):
         """setup before every test"""
         Square._Base__nb_objects = 0
+
+    def test_docstrings(self):
+        self.assertIsNotNone(doc_check)
+        self.assertIsNotNone(Square.__doc__)
+        self.assertIs(hasattr(Square, "__init__"), True)
+        self.assertIsNotNone(Square.__init__.__doc__)
+        self.assertIs(hasattr(Square, "size"), True)
+        self.assertIsNotNone(Square.size.__doc__)
+        self.assertIsNotNone(Square.y.__doc__)
+        self.assertIs(hasattr(Square, "__str__"), True)
+        self.assertIsNotNone(Square.__str__.__doc__)
+        self.assertIs(hasattr(Square, "update"), True)
+        self.assertIsNotNone(Square.update.__doc__)
+        self.assertIs(hasattr(Square, "to_dictionary"), True)
+        self.assertIsNotNone(Square.to_dictionary.__doc__)
 
     # -------------- Task 10 ----------------
     def test_subclass_of_base(self):
@@ -41,7 +57,6 @@ class SquareTestCase(unittest.TestCase):
         self.assertTrue(hasattr(Square(1), "_Rectangle__height"))
         self.assertTrue(hasattr(Square(1), "_Rectangle__x"))
         self.assertTrue(hasattr(Square(1), "_Rectangle__y"))
-        self.assertTrue(hasattr(Square(1), "_Square__size"))
 
     def test_instantiation(self):
         """Test Square() instantiation with 1 arguments"""

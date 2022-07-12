@@ -21,8 +21,9 @@ class Base:
 
     @staticmethod
     def to_json_string(list_dictionaries):
-        """static method for converting a list dictionary into a json string"""
-        if not list_dictionaries or not len(list_dictionaries):
+        """converting a list dictionary into a json string"""
+        if not list_dictionaries or not len(list_dictionaries) or \
+        list_dictionaries is None:
             list_dictionaries = []
         return json.dumps(list_dictionaries)
 
@@ -62,3 +63,35 @@ class Base:
             attr_list = Base.from_json_string(f.read())
         ins_list = [cls.create(**attr) for attr in attr_list]
         return ins_list
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """Converts 'list_objs' to csv format"""
+        if not list_objs:
+            list_objs = []
+        with open("{}.csv".format(cls.__name__), 'w', encoding="utf-8") as fil:
+            if cls.__name__ == "Rectangle":
+                fields = ['id', 'width', 'height', 'x', 'y']
+            elif cls.__name__ == "Square":
+                fields = ['id', 'size', 'x', 'y']
+            writer = csv.DictWriter(fil, fieldnames=fields)
+            for obj in list_objs:
+                writer.writerow(obj.to_dictionary())
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """Loads file containing csv representation"""
+        list_objs = []
+        with open("{}.csv".format(cls.__name__), 'r') as file_csv:
+            if cls.__name__ == "Rectangle":
+                fields = ['id', 'width', 'height', 'x', 'y']
+            elif cls.__name__ == "Square":
+                fields = ['id', 'size', 'x', 'y']
+            reader = csv.DictReader(file_csv, fieldnames=fields)
+            list_objs = []
+            for row in reader:
+                for key in row:
+                    row[key] = int(row[key])
+                list_objs.append(cls.create(**row))
+        return list_objs
+
