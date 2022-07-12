@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """module for square class inheriting from the rectangle class"""
-from .rectangle import Rectangle
+from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
@@ -40,5 +40,6 @@ class Square(Rectangle):
                 setattr(self, attr, value)
 
     def to_dictionary(self):
+        """converts square attributes into a dictionary"""
         attrs = ["id", "x", "size", "y"]
         return {attr: getattr(self, attr) for attr in attrs}
