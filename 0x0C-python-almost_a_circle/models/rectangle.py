@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-from .base import Base
 """Module for the rectangle class"""
+from .base import Base
 
 
 class Rectangle(Base):
