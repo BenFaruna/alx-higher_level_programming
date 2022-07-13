@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """module for the base class"""
 import json
+from os import path
+import csv
 
 
 class Base:
@@ -59,6 +61,8 @@ class Base:
     def load_from_file(cls):
         """returns a list of instances from a file"""
         filename = cls.__name__ + ".json"
+        if not path.isfile(filename):
+            return []
         with open(filename, "r") as f:
             attr_list = Base.from_json_string(f.read())
         ins_list = [cls.create(**attr) for attr in attr_list]
