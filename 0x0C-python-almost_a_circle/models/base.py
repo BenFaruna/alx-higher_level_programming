@@ -41,10 +41,10 @@ class Base:
         """saves list of object into a file as json string"""
         if not list_objs:
             list_objs = []
-        filename = cls.__name__
+        filename = "{}.json".format(cls.__name_)
         str_list = [obj.to_dictionary() for obj in list_objs]
 
-        with open(filename + ".json", "w") as f:
+        with open(filename, "w") as f:
             f.write(Base.to_json_string(str_list))
 
     @classmethod
@@ -60,7 +60,7 @@ class Base:
     @classmethod
     def load_from_file(cls):
         """returns a list of instances from a file"""
-        filename = cls.__name__ + ".json"
+        filename = "{}.json".format(cls.__name__)
         if not path.isfile(filename):
             return []
         with open(filename, "r") as f:
