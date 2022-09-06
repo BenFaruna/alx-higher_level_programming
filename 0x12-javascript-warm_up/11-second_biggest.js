@@ -9,11 +9,11 @@ if (len < 3) {
   let secondBiggest = 0;
 
   for (let count = 0; count < len; count++) {
-    if (numArray[count] > firstBiggest) {
+    if (parseInt(numArray[count]) > firstBiggest) {
       secondBiggest = firstBiggest;
-      firstBiggest = numArray[count];
-    } else if (numArray[count] > secondBiggest) {
-      secondBiggest = numArray[count];
+      firstBiggest = parseInt(numArray[count]);
+    } else if (parseInt(numArray[count]) > secondBiggest) {
+      secondBiggest = parseInt(numArray[count]);
     }
   }
   console.log(secondBiggest);
