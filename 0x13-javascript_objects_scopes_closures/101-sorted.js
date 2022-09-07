@@ -4,7 +4,7 @@ const data = require('./101-data').dict;
 
 const sortedData = {};
 for (const key in data) {
-  newKey = data[key];
+  let newKey = data[key];
   if (newKey in sortedData) {
     sortedData[newKey].push(key);
   } else {
