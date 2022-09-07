@@ -11,7 +11,7 @@ function concat (firstFile, secondFile, saveFile) {
 
 const file1 = process.argv[2];
 const file2 = process.argv[3];
-const file3 = process.argv[4]
+const file3 = process.argv[4];
 
 if (process.argv.length === 5) {
   concat(file1, file2, file3);
