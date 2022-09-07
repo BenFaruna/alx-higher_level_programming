@@ -2,7 +2,7 @@
 
 const data = require('./101-data').dict;
 
-sortedData = {}
+const sortedData = {};
 for (const key in data) {
   newKey = data[key];
   if (newKey in sortedData) {
