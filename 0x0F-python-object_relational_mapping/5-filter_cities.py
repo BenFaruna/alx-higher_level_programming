@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """list cities from specific state"""
 from sys import argv
 import MySQLdb as mysql_

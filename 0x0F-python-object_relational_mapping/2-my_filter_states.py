@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """list db entry for a specific state"""
 import sys
 import MySQLdb as mysql_

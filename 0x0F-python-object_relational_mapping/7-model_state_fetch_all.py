@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """sqlalchemy select all columns statement"""
 from sys import argv
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """state class for state  ORM"""
 
 from sqlalchemy import Column, String, Integer

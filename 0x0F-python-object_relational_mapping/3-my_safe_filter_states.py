@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """prevention again SQL injection with prepared statements"""
 import sys
 import MySQLdb as mysql_
