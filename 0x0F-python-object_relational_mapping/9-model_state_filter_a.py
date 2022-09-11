@@ -16,8 +16,7 @@ if __name__ == "__main__":
     engine = create_engine(db_url, pool_pre_ping=True)
     Base.metadata.create_all(engine)
 
-    Session = sessionmaker()
-    Session.configure(bind=engine)
+    Session = sessionmaker(bind=engine)
     session = Session()
 
     query = session.query(State).filter(
