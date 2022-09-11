@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """show all data in the database"""
 import sys
 import MySQLdb as mysql_
@@ -6,9 +6,11 @@ import MySQLdb as mysql_
 if __name__ == "__main__":
     conn = mysql_.connect("localhost", *sys.argv[1:])
 
-    conn.query("SELECT * FROM states ORDER BY states.id;")
-    result = conn.store_result()
-    states = result.fetch_row(maxrows=0)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM states ORDER BY states.id;")
+    result = cur.fetchall()
 
-    for state in states:
+    for state in result:
         print(state)
+    cur.close()
+    conn.close()
