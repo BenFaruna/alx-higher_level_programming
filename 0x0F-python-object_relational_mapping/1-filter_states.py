@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """List data with a pattern"""
 
-import sys
-import MySQLdb as mysql_
+import MySQLdb
+from sys import argv
 
 if __name__ == "__main__":
-    conn = mysql_.connect("localhost", *sys.argv[1:])
-
+    conn = MySQLdb.connect(host="localhost", port=3306, user=argv[1],
+                           passwd=argv[2], db=argv[3], charset="utf8")
     cur = conn.cursor()
     cur.execute("SELECT * FROM states ORDER BY states.id ASC")
     query_rows = cur.fetchall()
