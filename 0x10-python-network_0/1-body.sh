@@ -1,3 +1,3 @@
 #!/bin/bash
 # script that displays the body of a response
-curl -Ls '$1'
+curl -Ls "$1"
