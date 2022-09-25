@@ -43,8 +43,5 @@ def find_peak(list_of_integers):
                         second_half[count] > second_half[count + 1]:
                     return second_half[count]
                 count = count + 1
-<<<<<<< HEAD
             if second_half[count] > second_half[count - 1]:
                 return second_half[count]
-=======
->>>>>>> a3e159e9b5333e9d932ebcf06170121a84ea2998
