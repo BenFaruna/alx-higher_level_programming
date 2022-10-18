@@ -13,7 +13,7 @@ request(url, (error, response, body) => {
   }
 
   for (const film of data.results) {
-	  for (const character of film.characters) {
+    for (const character of film.characters) {
       if (character.endsWith(id)) {
         moviesCount = moviesCount + 1;
       }
