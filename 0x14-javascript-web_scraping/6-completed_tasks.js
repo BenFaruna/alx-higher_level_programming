@@ -1,13 +1,17 @@
 #!/usr/bin/node
 
-const request = require("request");
+const request = require('request');
 const url = process.argv[2];
-let completedTasks = {};
+const completedTasks = {};
 
 request(url, (error, response, body) => {
-  let data = JSON.parse(body);
+  if (error) {
+    console.log(error);
+    return;
+  }
+  const data = JSON.parse(body);
   for (const todo of data) {
-    if (todo.completed == true) {
+    if (todo.completed === true) {
       if (todo.userId in completedTasks) {
         completedTasks[todo.userId] = completedTasks[todo.userId] + 1;
       } else {
@@ -15,5 +19,5 @@ request(url, (error, response, body) => {
       }
     }
   }
-	console.log(completedTasks);
+  console.log(completedTasks);
 });
