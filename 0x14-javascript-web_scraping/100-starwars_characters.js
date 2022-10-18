@@ -12,6 +12,7 @@ request(url, (error, response, body) => {
     return;
   }
   const data = JSON.parse(body).characters;
+	data.sort();
   for (const characterUrl of data) {
     request(characterUrl, (error2, response2, body2) => {
       if (error2) {
